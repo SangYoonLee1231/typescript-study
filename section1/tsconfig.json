@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES5", // 변환되는 JS의 버전 설정
+    "module": "ESNext", // 변환되는 JS의 모듈 설정
+    "outDir": "dist", // JS 파일의 저장 위치 설정
+    "strict": true, // 엄격한 타입 검사 모드 설정
+    "moduleDetection": "force" // 각 파일을 독립된 모듈로 인식
+  },
+  "include": ["src"] // 컴파일 범위 설정
+}
