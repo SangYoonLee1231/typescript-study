@@ -8,8 +8,8 @@
 
 ### 필기 노트
 
-- <a href="">Section 1. 타입스크립트 개론</a>
-- <a href="">Section 2. 타입스크립트 기본</a>
+- <a href="https://github.com/SangYoonLee1231/typescript-study/blob/main/study_note/section1.md">Section 1. 타입스크립트 개론</a>
+- <a href="https://github.com/SangYoonLee1231/typescript-study/blob/main/study_note/section2.md">Section 2. 타입스크립트 기본</a>
 - Section 3. 타입스크립트 이해하기
 - Section 4. 함수와 타입
 - Section 5. 인터페이스

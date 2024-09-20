@@ -83,7 +83,7 @@
   let unde1: undefined = undefined;
   ```
 
-- null에 대한 엄격한 모드를 풀어 숫자 변수에 초기값으로 null값 할당하기
+- null에 대한 엄격한 모드를 풀어 숫자 변수에 초기값으로 null 할당하기
 
   ```json
   {
