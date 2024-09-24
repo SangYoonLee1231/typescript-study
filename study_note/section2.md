@@ -205,7 +205,7 @@ let user: object = {
 user.id; // 에러!
 ```
 
-- TS에 object라는 이 타입은 그냥 이 값이 객체인 것 외에는 아무런 정보도 없는 타입익 때문에
+- TS에 object라는 이 타입은 그냥 이 값이 객체인 것 외에는 아무런 정보도 없는 타입이기 때문에
 
 - 이렇게 정의를 하면 이 객체의 프로퍼티나 메소드가 뭐가 있는지 이 타입은 알 수가 없다.
 
@@ -223,7 +223,7 @@ let userCopy: {
 userCopy.id;
 ```
 
-- 객체의 타입을 정의할 때는 객체의 모든 프로퍼티들의 타입까지 구조적으로 다 정의할 수 있는 방식인 **객체 리터럴 타입**을 사용한다.
+- 객체의 타입을 정의할 때는 객체의 모든 프로퍼티들의 타입까지 구조적으로 다 정의하는 방식인 **객체 리터럴 타입**을 사용한다.
 
 <br/>
 
@@ -237,7 +237,7 @@ let dog: {
 };
 ```
 
-- 객체의 구조를 기준으로 타입을 정의한다. → 구조적 타입 시스템 (프로퍼티를 기준으로 타입을 결정한다, 프로퍼티 기반 타입 시스템)
+- TS는 객체의 구조를 기준으로 타입을 정의한다. → 구조적 타입 시스템 (프로퍼티를 기준으로 타입을 결정한다, 프로퍼티 기반 타입 시스템)
 
 - 이름만으로 타입을 정의: 명목적 타입 시스템
 
@@ -247,7 +247,7 @@ let dog: {
 
 ```tsx
 let user2: {
-  id?: number;
+  id?: number; // 선택적 프로퍼티
   name: string;
 } = {
   name: "홍길동",
@@ -267,5 +267,123 @@ let config: {
 ```
 
 - readonly 키워드를 붙여주면 프로퍼티 값을 바꾸는 것을 막아준다.
+
+<br/><br/>
+
+## 타입 별칭
+
+- 타입을 정의하는 코드가 중복될 수 있음을 방지하고자, 타입을 변수처럼 선언하는 문법
+
+```tsx
+let user: {
+  id: number;
+  name: string;
+  nickname: string;
+  birth: string;
+  bio: string;
+  location: string;
+} = {
+  id: 1,
+  name: "이상윤",
+  nickname: "syl",
+  birth: "1998.01.23",
+  bio: "안녕하세요",
+  location: "서울시",
+};
+
+let user2: {
+  id: number;
+  name: string;
+  nickname: string;
+  birth: string;
+  bio: string;
+  location: string;
+} = {
+  id: 2,
+  name: "이상윤",
+  nickname: "syl",
+  birth: "1998.01.23",
+  bio: "안녕하세요",
+  location: "서울시",
+};
+```
+
+- 위의 예시에서 user들의 타입을 정의하는 코드가 중복되므로, 타입 별칭을 이용하여 아래와 같이 코드를 줄일 수 있다.
+
+```tsx
+// 타입 별칭 만들기
+type User = {
+  id: number;
+  name: string;
+  nickname: string;
+  birth: string;
+  bio: string;
+  location: string;
+};
+
+let userCopy: User = {
+  id: 1,
+  name: "이상윤",
+  nickname: "syl",
+  birth: "1998.01.23",
+  bio: "안녕하세요",
+  location: "서울시",
+};
+
+let user2Copy: User = {
+  id: 2,
+  name: "이상윤",
+  nickname: "syl",
+  birth: "1998.01.23",
+  bio: "안녕하세요",
+  location: "서울시",
+};
+```
+
+<br/>
+
+- 타입 별칭을 사용할 땐 같은 스코프 내에서는 타입의 이름이 중복되지 않도록 해주어야 한다.
+
+- 타입 별칭 코드를 컴파일하여 JS로 변환하면 이 코드는 제거된다.
+
+<br/><br/>
+
+## 인덱스 시그니쳐
+
+- 객체 타입 정의 시 key와 value의 규칙을 기준으로 정의할 수 있는 문법
+
+- 아주 유연한 타입 정의가 가능하다.
+
+- 객체에 정의해야 할 프로퍼티가 너무 많을 때, key와 value의 타입이 어떤 규칙을 가질 때 유용하다.
+
+```tsx
+// key와 value의 규칙을 기준으로 객체의 타입을 정의할 수 있는 문법
+type CountryCodes = {
+  [key: string]: string;
+};
+
+let countryCodes: CountryCodes = {
+  Korea: "ko",
+  UnitedStates: "us",
+  UnitedKingdom: "us",
+};
+
+type CountryNumberCodes = {
+  [key: string]: number;
+  Korea: number;
+};
+
+let countryNumberCodes: CountryNumberCodes = {
+  Korea: 410,
+  UnitedState: 840,
+  UnitedKindom: 826,
+};
+```
+
+- 주의점
+
+  - 객체의 프로퍼티가 아예 없더라도 타입 규칙을 위반하진 않으므로 에러가 발생하지 않는다.
+  - 그렇기에, 꼭 있어야 할 프로퍼티는 반드시 타입 정의 시 적어주자.
+  - 다만 이런 경우에는 추가적인 프로퍼티의 Value의 타입이 인덱스 시그니처의 Value 타입과 일치하거나 호환해야 한다.
 
 <br/><br/>
