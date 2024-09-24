@@ -484,4 +484,6 @@ function func4(): never {
 
 - any 타입의 변수도 never 타입의 변수에는 절대 담을 수 없다.
 
+- never은 다음과 같은 경우에도 활용할 수 있다. → <a href="https://www.pumpkiinbell.com/blog/typescript/exhaustive-checking">Exhaustiveness Checking</a>
+
 <br/><br/>
