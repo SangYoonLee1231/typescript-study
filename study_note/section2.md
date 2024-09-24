@@ -387,3 +387,97 @@ let countryNumberCodes: CountryNumberCodes = {
   - 다만 이런 경우에는 추가적인 프로퍼티의 Value의 타입이 인덱스 시그니처의 Value 타입과 일치하거나 호환해야 한다.
 
 <br/><br/>
+
+## 기타 타입
+
+### any
+
+- 특정 변수의 타입을 확실히 모를 때 사용할 수 있는 타입
+
+- 어떠한 타입의 변수도 담을 수 있다.
+
+```tsx
+let anyVar: any = 10;
+anyVar = "hello";
+
+anyVar = true;
+anyVar = {};
+anyVar = () => {};
+
+anyVar.toUpperCase();
+anyVar.tofixed();
+
+let num: number = 10;
+num = anyVar;
+```
+
+- 다만, any 타입을 사용한다는 것은 TS의 이점을 모두 포기하는 것이므로, 가능한 사용하지 않는 것이 좋다.
+
+<br/>
+
+### unknown
+
+- any처럼 모든 값을 다 할당받을 순 있지만, any와 다르게 그 반대는 허용되지 않는다.
+
+- unknown 타입은 any 타입보다는 안전하다.
+
+```ts
+let unknownVar: unknown;
+unknownVar = "";
+unknownVar = 1;
+unknownVar = () => {};
+
+if (typeof unknownVar == "number") {
+  num = unknownVar;
+}
+```
+
+<br/>
+
+### void
+
+- void는 '공허'라는 뜻. 아무것도 없음을 의미하는 타입
+
+```ts
+function func1(): string {
+  return "hello";
+}
+
+function func2(): void {
+  console.log("hello");
+}
+```
+
+- 리턴값이 없는 함수의 리턴값 타입을 설정할 때 void를 쓴다.
+
+- undefined나 null로 성정하면 함수에서 return문이 반드시 필요하게 되므로, 그래서 void 타입을 사용한다.
+
+- void 타입으로 정의한 변수에는 어떠한 값도 담을 수 없다. 오직 undefined만 담을 수 있다.
+
+- 다만 `tsconfig.js`의 `strictNullChecks`를 끄면 void 타입 변수에 null을 할당할 수 있다.
+
+<br/>
+
+### never
+
+- 존재하지 않는 불가능한 타입
+
+```ts
+function func3(): never {
+  while (true) {}
+}
+```
+
+- 함수가 절대로 정상적으로 종료될 수 없어서, 함수의 반환값 자체가 있는 것이 모순인 상활일 때 never 타입이 필요하다.
+
+```ts
+function func4(): never {
+  throw new Error();
+}
+```
+
+- 실행되면 바로 프로그램이 중지되므로, never로 정의하는 것이 바람직하다.
+
+- any 타입의 변수도 never 타입의 변수에는 절대 담을 수 없다.
+
+<br/><br/>
