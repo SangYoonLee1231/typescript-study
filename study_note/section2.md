@@ -421,6 +421,8 @@ num = anyVar;
 
 - unknown 타입은 any 타입보다는 안전하다.
 
+- 안전함을 추구하는 any 자료형, any 쓰면 TS 쓰는 이유가 없다시피 하니까. 걍 안전한 의미로 unknown 쓰면 될 것 같은 느낌.
+
 ```ts
 let unknownVar: unknown;
 unknownVar = "";
@@ -451,6 +453,8 @@ function func2(): void {
 - 리턴값이 없는 함수의 리턴값 타입을 설정할 때 void를 쓴다.
 
 - undefined나 null로 성정하면 함수에서 return문이 반드시 필요하게 되므로, 그래서 void 타입을 사용한다.
+
+- return 하더라도, 반환 값이 없는 경우도 void를 쓴다.
 
 - void 타입으로 정의한 변수에는 어떠한 값도 담을 수 없다. 오직 undefined만 담을 수 있다.
 
