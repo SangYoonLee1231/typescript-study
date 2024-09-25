@@ -14,7 +14,7 @@
 
 - 타입스크립트는 문법만 달달 외운다고 실무에 바로 적용할 수 있는 만만한 언어가 아니다.
 
-- 원리와 개념의 뒷받침 없이는 조금만 낯선 상황이 오면 이를 해결해나갈 수 없다.
+- 원리와 개념의 뒷받침이 없으면 낯선 상황 앞에서 문제를 해결해나갈 수 없다.
 
 - 따라서 한 번 배울 때 제대로 배워서 JS를 사용했을 때보다 더 안정적이고 좋은 코드를 만들어낼 수 있어야 한다.
 
@@ -109,23 +109,27 @@
 
 <br/>
 
-```tsx
-// vold 타입
-// void는 undefined의 슈퍼 타입
+- void 타입
 
-function voidExam() {
-  function voidFunc(): void {
-    console.log("hi");
+  ```tsx
+  // vold 타입
+  // void는 undefined의 슈퍼 타입
+
+  function voidExam() {
+    function voidFunc(): void {
+      console.log("hi");
+    }
+
+    let voidVar: void = undefined; // 업 캐스팅
+
+    function voidFunc2(): void {
+      console.log("hello");
+      return undefined;
+    } // 반환값도 업 캐스팅
   }
+  ```
 
-  let voidVar: void = undefined; // 업 캐스팅
-
-  function voidFunc2(): void {
-    console.log("hello");
-    return undefined;
-  } // 반환값도 업 캐스팅
-}
-```
+<br/>
 
 - any 타입
 
