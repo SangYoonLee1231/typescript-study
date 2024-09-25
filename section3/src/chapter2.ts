@@ -60,3 +60,19 @@ function voidExam() {
 //
 
 // any 타입
+// 치트키 타입, 타입 계층도를 완벽히 무시
+// 모든 타입의 슈퍼 타입이자, 모든 타입의 서브 타입이기도 함 (never만 예외)
+
+function anyExam() {
+  let unknownVar: unknown;
+  let anyVar: any;
+
+  anyVar = unknownVar; // 다운 캐스팅이 가능
+
+  let undefinedVar: undefined;
+  undefinedVar = anyVar; // 다운 캐스팅이 가능
+
+  let neverVar: never;
+  // neverVar = anyVar; // 네버 타입은 정말 순수한 공집합이므로
+  // 네버 타입 변수에는 그 어떤 타입도 다운 캐스팅이 불가능
+}
