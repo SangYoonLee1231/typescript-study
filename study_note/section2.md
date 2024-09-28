@@ -454,7 +454,7 @@ function func2(): void {
 
 - undefined나 null로 설정한다면 함수에서 return문이 반드시 필요하게 되므로, 그래서 void 타입을 사용하는 것이다.
 
-- return 하더라도, 반환 값이 없는 경우(`return;`)도 void를 사용한다고 한다.
+- return 하더라도 반환 값이 없는 경우(`return;`)또한 void를 사용한다.
 
 - void 타입으로 정의한 변수에는 어떠한 값도 담을 수 없다. 오직 undefined만 담을 수 있다.
 
