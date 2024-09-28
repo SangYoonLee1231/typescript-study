@@ -278,38 +278,38 @@ let arr: (number | string | boolean)[] = [1, "hello", true];
 ```tsx
 // 객체 타입들을 이용해서 유니온 타입 만들기
 type Dog = {
-name: string;
-color: string;
+  name: string;
+  color: string;
 };
 
 type Person = {
-name: string;
-language: string;
+  name: string;
+  language: string;
 };
 
 type Union1 = Dog | Person;
 
 let union1: Union1 = {
-name: "",
-color: "",
+  name: "",
+  color: "",
 };
 
 let union2: Union1 = {
-name: "",
-language: "",
+  name: "",
+  language: "",
 };
 
 let union3: Union1 = {
-name: "",
-color: "",
-language: "",
+  name: "",
+  color: "",
+  language: "",
 };
 
-/_
+/*
 let union4: Union1 = {
 name: "",
 }; // name만 있는 객체는 Dog 타입과 Person 타입의 슈퍼 타입에 해당하는 객체, 어디에도 포함될 수 없다.
-_/
+*/
 ```
 
 - 객체들의 유니온 타입은 집합 개념으로 이해하면 좋다.
@@ -352,6 +352,8 @@ let variable = 10; // 변수 타입을 number로 자동 추론
 
 - 어떤 상황에서 TS가 자동으로 타입을 잘 추론하는지
 - 또 어떤 원리로 타입을 추론하는지 함께 살펴보자
+
+<br/>
 
 ```tsx
 let a = 10; // number로 잘 추론
@@ -404,6 +406,8 @@ function func2(message = "hello") {
   - 변수의 초기값을 지정하지 않으면 이 때는 암묵적인 any 타입으로 추론된다.
   - 이러한 상황은 안 만드는 것이 좋다.
 
+<br/>
+
 - 상황 2
 
   ```tsx
@@ -412,6 +416,8 @@ function func2(message = "hello") {
 
   const str = "hello"; // string 리터럴 타입으로 추론
   ```
+
+<br/>
 
 - 다른 상황
 
