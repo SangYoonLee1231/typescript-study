@@ -405,6 +405,7 @@ function func2(message = "hello") {
   - 이렇게 타입이 계속 바뀌는 상황을 'any 타입의 진화'라고 부른다.
   - 변수의 초기값을 지정하지 않으면 이 때는 암묵적인 any 타입으로 추론된다.
   - 이러한 상황은 안 만드는 것이 좋다.
+  - `tsconfig`에 `noImplicitAny`를 true로 설정하면 any 타입 진화를 원천적으로 막을 수 있다고 한다.
 
 <br/>
 
@@ -431,6 +432,170 @@ function func2(message = "hello") {
 
   ```tsx
   let num2 = 10; // 이 케이스도 타입 넓히기에 포함
+  ```
+
+<br/><br/>
+
+## 타입 단언
+
+```tsx
+type Person = {
+  name: string;
+  age: number;
+};
+
+let person: Person = {};
+person.name = "이상윤";
+person.age = 27;
+// 이런 식으로 객체를 초기화 해주고 싶으면 어떻게 해야 할까?
+```
+
+- 이럴 때 타입 단언을 사용한다.
+
+```tsx
+let person = {} as Person;
+person.name = "이상윤";
+person.age = 27;
+```
+
+- 다른 예제
+
+```tsx
+type Dog = {
+  name: string;
+  color: string;
+};
+
+let dog = {
+  name: "돌돌이",
+  color: "brown",
+  breed: "진도",
+} as Dog;
+```
+
+- 위의 예제처럼 초과 프로퍼티 검사 피할 때 as를 쓸 수 있다.
+
+<br/>
+
+- 타입 단언을 사용하려면 적어도 하나의 규칙을 만족해 주어야 한다.
+
+  - A as B일 떄, A가 B의 슈퍼타입 or 서브타입 이어야 함
+
+```tsx
+let num1 = 10 as never; // A는 B의 슈퍼타입
+let num2 = 10 as unknown; // A는 B의 서브타입
+// let num3 = 10 as string; // A는 B의 슈퍼타입 X, 서브타입 X
+let num4 = 10 as unknown as string; // 중간에 unknown을 끼고 다중으로 단언을 하면 이런 식으로 단언이 안 되는 타입으로도 단언을 해줄 수 있다.
+// 다만, 이 것은 절대로 좋은 방법이 아니다. (TS를 쓰는 이유가 없어짐)
+```
+
+<br/>
+
+### const 단언
+
+- const로 선언한 변수와 동일한 효과를 보도록 만들어주는 단언
+
+- const 단언은 특별히 객체 타입과 함께 사용할 때 좀 활둉도가 있다.
+
+```tsx
+let cat = {
+  name: "야용이",
+  color: "yellow",
+} as const; // 모든 프로퍼티가 readonly가 된 객체로 추론
+
+cat.name = ""; // 에러
+```
+
+- 모든 프로퍼티를 readonly 프로퍼티로 만들 수 있어서 상황에 따라 굉장히 편리하게 사용할 수 있다.
+
+<br/>
+
+### Non Null 단언
+
+```tsx
+type Post = {
+  title: string;
+  author?: string;
+};
+
+let post: Post = {
+  title: "게시글1",
+  author: "이상윤",
+};
+
+const len: number = post.author!.length;
+// author 값이 없으면 number 값 전체가 undefined로 인식
+// ! 붙인 값이 null이나 undefined가 아니라고 컴파일러가 믿도록 만듦
+```
+
+<br/><br/>
+
+## 타입 좁히기
+
+- 조건문을 이용해 넓은 타입에서 좁은 타입으로 타입을 상황에 따라 좁히는 방법
+
+```tsx
+function func(value: number | string) {
+  if (typeof value === "number") {
+    console.log(value.toFixed());
+    // value는 이 조건문 내에서는 number 타입으로 TS에서 자동으로 추론해줌
+  } else if (typeof value === "string") {
+    console.log(value.toUpperCase());
+    // value는 이 조건문 내에서는 string 타입으로 TS에서 자동으로 추론해줌
+  }
+}
+```
+
+- 이렇게 조건문을 통해 타입을 좁히는 표현을 '타입 가드'로 부른다.
+
+<br/>
+
+- 대표적으로 사용하는 몇 가지 타입 가드들
+
+  ```tsx
+  function func2(value: number | string | Date | null) {
+    if (typeof value === "number") {
+      console.log(value.toFixed());
+      // value는 이 조건문 내에서는 number 타입으로 TS에서 자동으로 추론해줌
+    } else if (typeof value === "string") {
+      console.log(value.toUpperCase());
+      // value는 이 조건문 내에서는 string 타입으로 TS에서 자동으로 추론해줌
+    }
+    //   } else if (typeof value === "object") {
+    //     console.log(value.getTime());
+    //   } // 이렇게 하면 안된다.
+    else if (value instanceof Date) {
+      console.log(value.getTime());
+    }
+  }
+  ```
+
+  ```tsx
+  type Person = {
+    name: string;
+    age: number;
+  };
+
+  function func3(value: number | string | Date | null | Person) {
+    if (typeof value === "number") {
+      console.log(value.toFixed());
+      // value는 이 조건문 내에서는 number 타입으로 TS에서 자동으로 추론해줌
+    } else if (typeof value === "string") {
+      console.log(value.toUpperCase());
+      // value는 이 조건문 내에서는 string 타입으로 TS에서 자동으로 추론해줌
+    }
+    //   } else if (typeof value === "object") {
+    //     console.log(value.getTime());
+    //   } // 이렇게 하면 안된다.
+    else if (value instanceof Date) {
+      console.log(value.getTime());
+    }
+    //   else if (value instanceof Person) {
+    //   } // instanceof 연산자는 우측에 '타입'이 들어와서는 안된다.
+    else if (value && "age" in value) {
+      console.log(`${value.age}는 ${value.age}살 입니다.`);
+    } // value가 있고, age가 value 안에 있다
+  }
   ```
 
 <br/><br/>

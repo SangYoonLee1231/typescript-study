@@ -28,6 +28,7 @@ let dog = {
   color: "brown",
   breed: "진도",
 } as Dog;
+// 초과 프로퍼티 검사 피할 때 as를 쓸 수 있다.
 
 // 타입 단언을 사용하려면 적어도 하나의 규칙을 만족해 주어야 한다.
 // A as B일 떄, A가 B의 슈퍼타입 or 서브타입 이어야 함
@@ -42,7 +43,7 @@ let num4 = 10 as unknown as string; // 중간에 unknown을 끼고 다중으로 
 
 // const 단언
 let num5 = 10 as const;
-// const로 선언한 변수와 동일한 효과를 보도록 만들어주는 단어
+// const로 선언한 변수와 동일한 효과를 보도록 만들어주는 단언
 
 // const 단언은 특별히 객체 타입과 함께 사용할 때 좀 활둉도가 있다.
 let cat = {
@@ -50,7 +51,7 @@ let cat = {
   color: "yellow",
 } as const; // 모든 프로퍼티가 readonly가 된 객체로 추론
 
-// cat.name = "":
+// cat.name = "";
 // 모든 프로퍼티를 readonly 프로퍼티로 만들 수 있어서 상황에 따라 괴앚ㅇ히 편리하게 사용할 수 있다.
 
 //
