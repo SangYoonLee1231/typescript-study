@@ -11,7 +11,7 @@
 - <a href="https://github.com/SangYoonLee1231/typescript-study/blob/main/study_note/section1.md">Section 1. 타입스크립트 개론</a>
 - <a href="https://github.com/SangYoonLee1231/typescript-study/blob/main/study_note/section2.md">Section 2. 타입스크립트 기본</a>
 - <a href="https://github.com/SangYoonLee1231/typescript-study/blob/main/study_note/section3.md">Section 3. 타입스크립트 이해하기</a>
-- Section 4. 함수와 타입
+- <a href="https://github.com/SangYoonLee1231/typescript-study/blob/main/study_note/section4.md">Section 4. 함수와 타입</a>
 - Section 5. 인터페이스
 - Section 6. 클래스
 - Section 7. 제네릭

@@ -599,3 +599,7 @@ function func(value: number | string) {
   ```
 
 <br/><br/>
+
+## 서로소 유니온 타입
+
+<br/><br/>
