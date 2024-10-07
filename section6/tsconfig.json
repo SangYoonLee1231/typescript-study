@@ -5,7 +5,9 @@
     "outDir": "dist",
     "strict": true,
     "strictNullChecks": false, // 엄격한 null 검사
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "allowJs": true
+    // "noImplicitAny": false
   },
   "include": ["src"]
 }
