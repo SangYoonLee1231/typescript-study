@@ -45,7 +45,7 @@ class ExecutiveOfficer extends Empolyee {
     this.officeNumber = officeNumber;
   }
 
-  // 매세드
+  // 매서드
   func() {
     // this.name = ""; // name이 private이므로 접근 금지
     this.age = 30;
