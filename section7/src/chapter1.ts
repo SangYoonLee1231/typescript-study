@@ -14,6 +14,7 @@ const [a, b] = swap("1", 2);
 // 두 번째 사례
 function returnFirstValue<T>(data: T[]) {
   return data[0];
+  // T 자체는 unknown 타입으로 추론
 }
 
 let num = returnFirstValue([0, 1, 2]); // 0
