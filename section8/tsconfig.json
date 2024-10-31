@@ -9,5 +9,5 @@
     "allowJs": true
     // "noImplicitAny": false
   },
-  "include": ["src", "dist/chapter1.js"]
+  "include": ["src"]
 }
