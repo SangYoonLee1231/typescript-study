@@ -313,7 +313,7 @@ numberList.print();
 
 const stringList = new List(["1", "2"]);
 
-// 클래스의 생성자를 호출할 때, 이 생성자의 인수로 전달하는 값(["1", "2])을 기준으로 타입 변수의 타입을 추론한다.
+// 클래스의 생성자를 호출할 때, 이 생성자의 인수로 전달하는 값(["1", "2"])을 기준으로 타입 변수의 타입을 추론한다.
 // 제네릭 인터페이스랑 제네릭 타입 변수와는 다르게 변수 선언 시 앞에 타입을 명시해주지 않아도 된다.
 // const stringList = new List<number>(["1", "2"]); <- 이럴 필요 없다
 ```
@@ -348,7 +348,7 @@ const promise2 = new Promise<number>((resolve, reject) => {
 
 promise2.then((response) => {
   console.log(response); // 20
-  // 이제response는 number 타입으로 잘 추론된다.
+  // 이제 response는 number 타입으로 잘 추론된다.
 });
 
 // 실패했을 때

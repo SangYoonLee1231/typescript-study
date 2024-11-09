@@ -35,5 +35,5 @@ const person2: Person = {
 type Person2 = typeof person2;
 
 function getPropertyKey2(person: Person, key: keyof typeof person2) {
-  return person2[key];
+  return person[key];
 } // keyof typeof person2 === "name" | "age"

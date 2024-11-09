@@ -42,7 +42,6 @@ type PartialUser = {
 //   name?: User["name"], -> string
 //   age?: User["age"] -> number
 // }
-
 //
 
 type BooleanUser = {

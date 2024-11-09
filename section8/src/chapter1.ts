@@ -1,6 +1,6 @@
 // 인덱스드 엑세스 타입 (Indexed Access Type)
 
-// index라는 것을 이용해서 다르 타입 내에 특정 property의 타입을 추출하는 타입
+// index라는 것을 이용해서 다른 타입 내에 특정 property의 타입을 추출하는 타입
 
 interface Post {
   title: string;
